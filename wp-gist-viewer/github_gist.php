@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: WP Gist Shower
+Plugin Name: WP Gist Viewer
 Plugin URI: http://aligoren.com
-Description: Github's Gist Shower
+Description: Github's Gist Viewer
 Version: 0.1
 Author: Ali GOREN
 Author URI: http://aligoren.com
