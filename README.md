@@ -1,6 +1,6 @@
 #Gist Viewer
 
-İndirme: [ZIP Dosyası](https://github.com/aligoren/wp-gist-viewer/raw/master/wp-gist-viewer.zip)
+İndirme: [ZIP Dosyası](https://github.com/aligoren/wp-gist-viewer/archive/master.zip)
 
 Kodlar: [wp-gist-viewer](wp-gist-viewer) dizininde
 
