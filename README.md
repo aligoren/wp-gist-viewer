@@ -1,5 +1,9 @@
 #Gist Viewer
 
+İndirme: [ZIP Dosyası](https://github.com/aligoren/wp-gist-viewer/raw/master/wp-gist-viewer.zip)
+
+Kodlar: [wp-gist-viewer](wp-gist-viewer) dizininde
+
 Gist üzerindeki kodları çeker. Örneğin;
 
 [https://gist.github.com/aligoren/93a61e9b613f06c97c8f](https://gist.github.com/aligoren/93a61e9b613f06c97c8f)
