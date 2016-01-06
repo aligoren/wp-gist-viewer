@@ -49,3 +49,8 @@ Eklendiği zaman böyle bir görüntü oluşuyor.
 Yazı sayfasında ise görüntü şöyle oluyor.
 
 ![gist5.png](gist5.png)
+
+
+#Katkı:
+
+Daha da iyileşmesi açısından katkı yapılabilir.
