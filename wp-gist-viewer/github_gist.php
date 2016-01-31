@@ -10,12 +10,17 @@ Author URI: http://aligoren.com
 
 
 add_action( 'admin_menu', 'gist_menu' );
+add_action( 'admin_init', 'wpGist_settings_update' );
 
 
 function gist_menu() {
 	add_options_page( 'Gist Settings', 'WpGist Options', 'manage_options', 'gist-wp', 'gist_options' );
 }
 
+function wpGist_settings_update(){
+	register_setting('wpGist_settings', 'client_id');
+	register_setting('wpGist_settings', 'client_secret_id');
+}
 
 function gist_options() {
 	if ( !current_user_can( 'manage_options' ) )  {
@@ -24,11 +29,9 @@ function gist_options() {
 
 	if($_GET["code"])
 	{
-
 		$code = $_GET['code'];
-
-		$data = 'client_id=' . '291792fd3b6c20afd5e1' . '&' .
-				'client_secret=' . '18a513950f5026ca6b793894dc34c7e7d3085b89' . '&' .
+		$data = 'client_id=' . get_option("client_id") . '&' .
+				'client_secret=' . get_option("client_secret_id") . '&' .
 				'code=' . urlencode($code);
 		$ch = curl_init('https://github.com/login/oauth/access_token');
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -38,20 +41,22 @@ function gist_options() {
 		$token =  $out[1];
 		curl_close($ch);
 
-echo $token;
-
-
+		echo $token;
 	}
-  ?>
+?>
+<h2>WpGist Ayarları</h2>
+<form method="post" action="options.php">
+	<?php settings_fields( 'wpGist_settings' ); ?>
+	<?php do_settings_sections( 'wpGist_settings_update' ); ?>
+	<label>Client Id <input type="text" name="client_id" id="client_id" value="<?php echo get_option("client_id"); ?>"/></label>
+	<label>Client Secret Id <input type="text" name="client_secret_id" id="client_secret_id" value="<?php echo get_option("client_secret_id"); ?>" /></label><br>
+		<?php submit_button(); ?>
+</form>
 
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <h2>Login Github</h2>
-<label>Client Id <input type="text" id="client_id" /></label>
-<label>code <input type="text" id="code" /></label>
 <button id="login">Login</button>
-<label>access_token <input type="text" id="access_token" /></label>
-<label>username <input type="text" id="username" /></label>
-<input type="hidden" value="<?php echo $token; ?>" id="acces_token" />
+<input type="hidden" value="<?php echo $token; ?>" id="acces_token"  />
 <script>
 // Step 2
 $('#login').click(function () {
@@ -59,26 +64,11 @@ $('#login').click(function () {
 		'/login/oauth/authorize' +
 		'?client_id=' + $('#client_id').val() +
 		'&scope=gist');
-
-
+	window.close();
 });
-
-	function getURLParameter(name) {
-	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
-	}
-
-	var code = getURLParameter("code");
-	if(code != null)
-	{
-			var access_token = $('#acces_token').val();
-			$.getJSON('https://api.github.com/user?access_token=' + access_token, function (user) {
-				alert('print object: ' + JSON.stringify(user));
-				$('#username').val(user.login);
-			});
-
-	}
 </script>
-	<?
+	<?php
+
 }
 
 
